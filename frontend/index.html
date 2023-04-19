@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee REGISTRATION</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>REGISTRATION</h1>
+    <form id="create-user-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="number">Contact Number</label>
+        <input type="text" id="number" name="number" required>
+
+        <label for="gender">Gender:</label>
+        <input type="text" id="gender" name="gender" required>
+
+        <label for="qualification">Qualification</label>
+        <input type="text" id="qualification" name="qualification" required>
+
+        <label for="totexp">Total year of Experience</label>
+        <input type="text" id="totexp" name="totexp" required>
+
+        <label for="yrofjoining">Year of Joining</label>
+        <input type="text" id="yrofjoining" name="yrofjoining">
+
+        <button type="submit" onclick="redirectToDisplayPage()" required>SUBMIT</button>
+    </form>
+
+    <script>
+        const form = document.getElementById("create-user-form");
+
+        form.addEventListener("submit", async (event) => {
+            event.preventDefault(); // prevent the form from submitting normally
+
+            // check that all required fields are filled in
+            if (form.checkValidity()) {
+                try {
+                    // submit the form using fetch
+                    const response = await fetch("http://localhost:3000/create", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(Object.fromEntries(new FormData(form)))
+                    });
+                    if (response.ok) {
+                        alert("User created successfully!");
+                        form.reset(); // reset the form
+                    } else {
+                        alert("Error creating user");
+                    }
+                } catch (error) {
+                    console.error(error);
+                    alert("Error creating user");
+                }
+            } else {
+                form.reportValidity(); // display error messages for invalid fields
+            }
+        });
+
+        function redirectToDisplayPage() {
+            window.location.href = "thanks.html";
+        }
+
+    </script>
+</body>
+</html>
