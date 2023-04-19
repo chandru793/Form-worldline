@@ -30,6 +30,7 @@
 
         <button type="submit" onclick="redirectToDisplayPage()" required>SUBMIT</button>
     </form>
+    <button type="submit" onclick="redirectToTablesPage()" required>View data</button>
 
     <script>
         const form = document.getElementById("create-user-form");
@@ -65,6 +66,9 @@
 
         function redirectToDisplayPage() {
             window.location.href = "thanks.html";
+        }
+        function redirectToTablesPage(){
+            window.location.href = "display.html";
         }
 
     </script>
